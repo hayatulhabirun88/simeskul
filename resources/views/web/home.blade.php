@@ -55,7 +55,7 @@
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
                                 <div class="card-content">
                                     <h5 class="font-15"> Pembina</h5>
-                                    <h2 class="mb-3 font-18">1,287</h2>
+                                    <h2 class="mb-3 font-18">{{ \App\Models\Pembina::count() }}</h2>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
@@ -76,7 +76,8 @@
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
                                 <div class="card-content">
                                     <h5 class="font-15">Presensi</h5>
-                                    <h2 class="mb-3 font-18">128</h2>
+                                    <h2 class="mb-3 font-18">
+                                        {{ \App\Models\Presensi::where('tgl_presensi', date('Y-m-d'))->count() }}</h2>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">

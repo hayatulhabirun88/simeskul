@@ -9,6 +9,11 @@ use App\Models\Ekstrakulikuler;
 
 class PendaftarController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      */

@@ -36,6 +36,7 @@
                                 <tr>
                                     <th width="50">No</th>
                                     <th>Nama Album</th>
+                                    <th>Lihat Album</th>
                                     <th>Tanggal Dibuat</th>
                                     <th width="150">Aksi</th>
                                 </tr>
@@ -45,6 +46,9 @@
                                     <tr>
                                         <td>{{ $index + $gallery->firstItem() }}</td>
                                         <td>{{ $glr->nama_album }}</td>
+                                        <td><a href="/eskul/gallery/{{ $glr->id }}"
+                                                class="btn btn-sm btn-success">Lihat</a>
+                                        </td>
                                         <td>{{ $glr->created_at }}</td>
                                         <td>
                                             <a href="/eskul/gallery/{{ $glr->id }}/edit"

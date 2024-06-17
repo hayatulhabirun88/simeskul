@@ -5,77 +5,98 @@
 @endsection
 
 @section('content')
-    <div class="container-xxl flex-grow-1 container-p-y">
-        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Pengguna /</span> Ubah</h4>
-        <div class="card">
-            <h5 class="card-header">Ubah Pengguna</h5>
-            <div class="card-body">
-                <form action="{{ route('update.pengguna', $user->id) }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    @method('PUT')
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label for="name" class="form-label">Nama</label>
-                                <input type="text" class="form-control" id="name" name="name"
-                                    value="{{ old('name', $user->name) }}" placeholder="Nama"
-                                    aria-describedby="defaultFormControlHelp">
-                            </div>
-                            <div class="mb-3">
-                                <label for="email" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="email" name="email"
-                                    value="{{ old('email', $user->email) }}" placeholder="Email"
-                                    aria-describedby="defaultFormControlHelp">
-                            </div>
-                            <div class="mb-3">
-                                <label for="no_tlp" class="form-label">No Telp</label>
-                                <input type="no_tlp" class="form-control" id="no_tlp" name="no_tlp"
-                                    value="{{ old('no_tlp', $user->no_tlp) }}" placeholder="No Telp"
-                                    aria-describedby="defaultFormControlHelp">
-                            </div>
-                            <div class="mb-3">
-                                <label for="level" class="form-label">Keterangan</label>
-                                <select class="form-select" id="level" name="level">
-                                    <option>-- Pilih Keterangan --</option>
-                                    <option value="pemilik_kost" {{ $user->level == 'pemilik_kost' ? 'selected' : '' }}>
-                                        Pemilik
-                                    </option>
-                                    <option value="penyewa" {{ $user->level == 'penyewa' ? 'selected' : '' }}>Penyewa
-                                    </option>
-                                    <option value="admin" {{ $user->level == 'admin' ? 'selected' : '' }}>Admin
-                                    </option>
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label for="">Dokumen KTP</label>
-                                <div class="mb-3">
-                                    <input type="file" class="form-control" name="dok_ktp" id="dok_ktp"
-                                        placeholder="Dokumen KTP" aria-describedby="fileHelpId" />
-                                </div>
-                            </div>
+    <div class="row ">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Ubah Pengguna</h4>
+                </div>
+                <div class="card-body">
+                    <form action="{{ route('update.pengguna', $pengguna->id) }}" method="post">
+                        @csrf
+                        @method('PUT')
+                        <div class="form-group">
+                            <label>Nama Pengguna</label>
+                            <input type="text" class="form-control" name="nama_pengguna"
+                                value="{{ old('nama_pengguna', $pengguna->name) }}">
+                            @error('nama_pengguna')
+                                <span style="color:red;font-size:13px;">{{ $message }}</span>
+                            @enderror
                         </div>
-                        <div class="col-md-6">
-                            <div class="" height="300px">
-                                <div class="mb-3">
-                                    @if ($user->dok_ktp)
-                                        <img class="img-fluid" src="{{ asset('/') }}images/{{ $user->dok_ktp }}"
-                                            alt="">
-                                    @else
-                                        <h1>KTP tidak di upload</h1>
-                                    @endif
-                                </div>
-                            </div>
+                        <div class="form-group">
+                            <label>Level</label>
+                            <select class="form-control" name="level" id="level">
+                                <option value="">Pilih Level</option>
+                                <option value="admin" {{ old('level', $pengguna->level) == 'admin' ? 'selected' : '' }}>
+                                    Admin</option>
+                                <option value="pembina" {{ old('level', $pengguna->level) == 'pembina' ? 'selected' : '' }}>
+                                    Kepala Sekolah
+                                </option>
+                                <option value="orang_tua"
+                                    {{ old('level', $pengguna->level) == 'orang_tua' ? 'selected' : '' }}>Pembina
+                                </option>
+                                <option value="kepala_sekolah"
+                                    {{ old('level', $pengguna->level) == 'kepala_sekolah' ? 'selected' : '' }}>
+                                    Orang Tua</option>
+                                <option value="siswa" {{ old('level', $pengguna->level) == 'siswa' ? 'selected' : '' }}>
+                                    Siswa</option>
+                            </select>
+                            @error('level')
+                                <span style="color:red;font-size:13px;">{{ $message }}</span>
+                            @enderror
                         </div>
-                        <div class="mb-3">
-                            <input type="submit" class="btn btn-primary" value="Ubah">
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" class="form-control" name="email"
+                                value="{{ old('email', $pengguna->email) }}">
+                            @error('email')
+                                <span style="color:red;font-size:13px;">{{ $message }}</span>
+                            @enderror
                         </div>
-                    </div>
-                </form>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" class="form-control" name="password">
+                            @error('password')
+                                <span style="color:red;font-size:13px;">{{ $message }}</span>
+                            @enderror
+                        </div>
 
+                        <br>
 
+                        <button class="btn btn-primary">Ubah</button>
+                    </form>
+                </div>
             </div>
         </div>
-
-
     </div>
 @endsection
+
+@push('style')
+@endpush
+
+@push('script')
+    <!-- JS Libraies -->
+    <script src="{{ asset('') }}otika/assets/bundles/sweetalert/sweetalert.min.js"></script>
+    <!-- Page Specific JS File -->
+    <script src="{{ asset('') }}otika/assets/js/page/sweetalert.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $("#hapuseskul").click(function(e) {
+                e.preventDefault();
+                swal({
+                    title: 'Apakah anda yakin?',
+                    text: 'Akan menghapus eskul ' + this.getAttribute('data-nama-eskul') + ' !',
+                    icon: 'warning',
+                    buttons: true,
+                    dangerMode: true,
+                }).then((willDelete) => {
+                    if (willDelete) {
+                        $("#deleteEskulForm").submit();
+                    }
+                });
+            });
+
+        });
+    </script>
+@endpush

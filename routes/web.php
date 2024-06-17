@@ -11,6 +11,7 @@ use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\PembinaController;
 use App\Http\Controllers\DatakostController;
 use App\Http\Controllers\PenggunaController;
+use App\Http\Controllers\PresensiController;
 use App\Http\Controllers\PendaftarController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\RegistrasiController;
@@ -91,53 +92,22 @@ Route::delete('/eskul/jadwal/{id}', [JadwalController::class, 'destroy'])->name(
 Route::get('/eskul/gallery', [GalleryController::class, 'index'])->name('eskul.gallery.index');
 Route::get('/eskul/gallery/create', [GalleryController::class, 'create'])->name('eskul.gallery.create');
 Route::post('/eskul/gallery/', [GalleryController::class, 'store'])->name('eskul.gallery.store');
+Route::get('/eskul/gallery/{id}', [GalleryController::class, 'show'])->name('eskul.gallery.show');
 Route::get('/eskul/gallery/{id}/edit', [GalleryController::class, 'edit'])->name('eskul.gallery.edit');
 Route::get('/eskul/gallery/search', [GalleryController::class, 'search'])->name('eskul.gallery.search');
 Route::put('/eskul/gallery/{id}', [GalleryController::class, 'update'])->name('eskul.gallery.update');
 Route::delete('/eskul/gallery/{id}', [GalleryController::class, 'destroy'])->name('eskul.gallerydestroy');
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-// REGISTRASI
-Route::get('/registrasi', [RegistrasiController::class, 'index'])->name('registrasi');
-Route::post('/registrasi', [RegistrasiController::class, 'store'])->name('proses.pendaftaran');
-
-// DATA KOST
-Route::get('/data-kost', [DatakostController::class, 'index'])->name('datakost');
-Route::get('/data-kost/create', [DatakostController::class, 'create'])->name('datakost.create');
-Route::post('/data-kost', [DatakostController::class, 'store'])->name('datakost.store');
-Route::get('/data-kost/{id}/edit', [DatakostController::class, 'edit'])->name('datakost.edit');
-Route::put('/data-kost/{id}', [DatakostController::class, 'update'])->name('datakost.update');
-Route::delete('/data-kost/{id}', [DatakostController::class, 'destroy'])->name('datakost.destroy');
-
-// BOOKING
-Route::get('/booking', [BookingController::class, 'index'])->name('booking');
-Route::get('/booking/create', [BookingController::class, 'create'])->name('booking.create');
-Route::post('/booking', [BookingController::class, 'store'])->name('booking.store');
-Route::post('/booking/konfirmasi/{id}', [BookingController::class, 'konfirmasi'])->name('booking.konfirmasi');
-Route::post('/booking/batal/{id}', [BookingController::class, 'batal'])->name('booking.batal');
-Route::get('/booking/{id}/edit', [BookingController::class, 'edit'])->name('booking.edit');
-Route::put('/booking/{id}', [BookingController::class, 'update'])->name('booking.update');
-Route::delete('/booking/{id}', [BookingController::class, 'destroy'])->name('booking.destroy');
-
-// TRANSAKSI
-Route::get('/transaksi', [TransaksiController::class, 'index'])->name('transaksi');
-Route::get('/transaksi/create', [TransaksiController::class, 'create'])->name('transaksi.create');
-Route::post('/transaksi', [TransaksiController::class, 'store'])->name('transaksi.store');
-Route::get('/transaksi/{id}/edit', [TransaksiController::class, 'edit'])->name('transaksi.edit');
-Route::put('/transaksi/{id}', [TransaksiController::class, 'update'])->name('transaksi.update');
-Route::delete('/transaksi/{id}', [TransaksiController::class, 'destroy'])->name('transaksi.destroy');
+// JADWAL EKSTRAKULIKULER
+Route::get('/presensi', [PresensiController::class, 'index'])->name('presensi.index');
+Route::get('/presensi/create', [PresensiController::class, 'create'])->name('presensi.create');
+Route::post('/presensi', [PresensiController::class, 'store'])->name('presensi.store');
+Route::get('/presensi/{id}', [PresensiController::class, 'show'])->name('presensi.show');
+Route::get('/presensi/{id}/edit', [PresensiController::class, 'edit'])->name('presensi.edit');
+Route::get('/presensi/search', [PresensiController::class, 'search'])->name('presensi.search');
+Route::put('/presensi/{id}', [PresensiController::class, 'update'])->name('presensi.update');
+Route::delete('/presensi/{id}', [PresensiController::class, 'destroy'])->name('presensidestroy');
+Route::post('/presensi/ajax-update-presensi', [PresensiController::class, 'ajax_presensi'])->name('presensi.ajax');
 
 // PENGGUNA
 Route::get('/pengguna', [PenggunaController::class, 'index'])->name('pengguna');

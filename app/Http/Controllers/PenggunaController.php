@@ -36,25 +36,16 @@ class PenggunaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
+            'nama_pengguna' => 'required|string|max:255',
             'email' => 'required|lowercase|email|max:255|string|unique:users,email',
             'password' => 'required|min:8',
-            'no_tlp' => 'required|max:255',
-            'level' => 'required',
-            'dok_ktp' => 'image|mimes:jpg,jpeg,png,gif'
+            'level' => 'required'
         ]);
+
         $user = new User();
-
-        if ($request->file('dok_ktp')) {
-            $namafile = md5($request->file('dok_ktp')->getClientOriginalName() . time()) . '.' . $request->file('dok_ktp')->getClientOriginalExtension();
-            $request->file('dok_ktp')->move(public_path() . '/images/', $namafile);
-            $user->dok_ktp = $namafile;
-        }
-
         $user->password = Hash::make($request->password);
-        $user->name = $request->name;
+        $user->name = $request->nama_pengguna;
         $user->email = $request->email;
-        $user->no_tlp = $request->no_tlp;
         $user->level = $request->level;
         $user->save();
 
@@ -74,8 +65,8 @@ class PenggunaController extends Controller
      */
     public function edit(string $id)
     {
-        $user = User::findOrFail($id);
-        return view('web.pengguna.edit', compact(['user']));
+        $pengguna = User::findOrFail($id);
+        return view('web.pengguna.edit', compact(['pengguna']));
     }
 
     /**
@@ -86,28 +77,24 @@ class PenggunaController extends Controller
         $user = User::findOrFail($id);
 
         $request->validate([
-            'name' => 'required|string|max:255',
+            'nama_pengguna' => 'required|string|max:255',
             'email' => 'required|lowercase|email|max:255|string|unique:users,email,' . $user->id,
-            'no_tlp' => 'required|max:255',
             'level' => 'required',
-            'dok_ktp' => 'image|mimes:jpg,jpeg,png,gif'
         ]);
 
-        if ($request->file('dok_ktp')) {
-            @unlink(public_path('/images/' . $user->dok_ktp));
-
-            $namafile = md5($request->file('dok_ktp')->getClientOriginalName() . time()) . '.' . $request->file('dok_ktp')->getClientOriginalExtension();
-            $request->file('dok_ktp')->move(public_path() . '/images/', $namafile);
-            $user->dok_ktp = $namafile;
+        if ($request->password) {
+            $request->validate([
+                'password' => 'required|min:8',
+            ]);
+            $user->password = Hash::make($request->password);
         }
 
-        $user->name = $request->name;
+        $user->name = $request->nama_pengguna;
         $user->email = $request->email;
-        $user->no_tlp = $request->no_tlp;
         $user->level = $request->level;
         $user->save();
 
-        return redirect()->to('pengguna')->with('success', 'Data berhasil di update');
+        return redirect()->to('pengguna')->with('success', 'Data berhasil di tambah');
     }
 
     /**
@@ -121,5 +108,10 @@ class PenggunaController extends Controller
         $user->delete();
 
         return redirect()->to('pengguna')->with('success', 'Data berhasil di hapus');
+    }
+
+    public function search()
+    {
+
     }
 }

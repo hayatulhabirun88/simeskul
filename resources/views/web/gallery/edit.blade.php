@@ -6,13 +6,20 @@
 
 @section('content')
     <div class="row ">
+
         <div class="col-12">
+            @if (session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+            @endif
             <div class="card">
                 <div class="card-header">
                     <h4>Edit Gallery</h4>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('eskul.gallery.update', $album->id) }}" method="post">
+                    <form action="{{ route('eskul.gallery.update', $album->id) }}" method="post"
+                        enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="mb-3">

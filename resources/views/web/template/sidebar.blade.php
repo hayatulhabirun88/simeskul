@@ -16,7 +16,7 @@
         </ul>
     </li>
     <li class="dropdown ">
-        <a href="#" class="nav-link text-left">
+        <a href="/presensi" class="nav-link text-left">
             <div class="icon-class"> <i style="font-size:18px; padding:4px;" class="fas fa-calendar-check"></i> </div>
             <span>Presensi</span>
         </a>
@@ -28,7 +28,7 @@
     </li>
     <li class="menu-header">PENGATURAN</li>
     <li class="dropdown ">
-        <a href="#" class="nav-link text-left"><i style="font-size:18px; padding:4px;"
+        <a href="/pengguna" class="nav-link text-left"><i style="font-size:18px; padding:4px;"
                 class="fas fa-users"></i><span>Pengguna</span></a>
     </li>
     <li class="dropdown ">
