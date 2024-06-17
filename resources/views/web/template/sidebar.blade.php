@@ -3,29 +3,50 @@
     <li class="dropdown active">
         <a href="/" class="nav-link"><i data-feather="monitor"></i><span>Dashboard</span></a>
     </li>
-    <li class="menu-header">MASTER</li>
+    <li class="menu-header">EKSTRAKULIKULER</li>
     <li class="dropdown ">
-        <a href="#" class="menu-toggle nav-link has-dropdown text-left"><i class="fas fa-address-book"
-                style="font-size:18px; padding:4px;"></i><span>Ekstrakulikuler</span></a>
-        <ul class="dropdown-menu">
-            <li><a class="nav-link" href="/eskul/kategori">Daftar Eskul</a></li>
-            <li><a class="nav-link" href="/eskul/pendaftar">Pendaftar</a></li>
-            <li><a class="nav-link" href="/eskul/lomba">Lomba</a></li>
-            <li><a class="nav-link" href="/eskul/jadwal">Jadwal</a></li>
-            <li><a class="nav-link" href="/eskul/gallery">Gallery</a></li>
-        </ul>
-    </li>
-    <li class="dropdown ">
-        <a href="/presensi" class="nav-link text-left">
-            <div class="icon-class"> <i style="font-size:18px; padding:4px;" class="fas fa-calendar-check"></i> </div>
-            <span>Presensi</span>
+        <a href="/eskul/kategori" class="nav-link text-left">
+            <div class="icon-class"> <i style="font-size:18px; padding:4px;" class="fas fa-clipboard-list"></i> </div>
+            <span>Daftar Eskul</span>
         </a>
-
     </li>
     <li class="dropdown ">
         <a href="/pembina" class="nav-link text-left"><i style="font-size:18px; padding:4px;"
                 class="fas fa-user-friends"></i><span>Pembina</span></a>
     </li>
+    <li class="dropdown ">
+        <a href="/eskul/pendaftar" class="nav-link text-left">
+            <div class="icon-class"> <i style="font-size:18px; padding:4px;" class="fas fa-users"></i> </div>
+            <span>Pendaftar</span>
+        </a>
+    </li>
+    <li class="dropdown ">
+        <a href="/eskul/lomba" class="nav-link text-left">
+            <div class="icon-class"> <i style="font-size:18px; padding:4px;" class="fas fa-play"></i> </div>
+            <span>Lomba</span>
+        </a>
+    </li>
+    <li class="dropdown ">
+        <a href="/eskul/jadwal" class="nav-link text-left">
+            <div class="icon-class"> <i style="font-size:18px; padding:4px;" class="fas fa-calendar-check"></i> </div>
+            <span>Jadwal</span>
+        </a>
+    </li>
+    <li class="dropdown ">
+        <a href="/eskul/gallery" class="nav-link text-left">
+            <div class="icon-class"> <i style="font-size:18px; padding:4px;" class="fas fa-images"></i>
+            </div>
+            <span>Gallery</span>
+        </a>
+    </li>
+    <li class="menu-header">PRESENSI</li>
+    <li class="dropdown ">
+        <a href="/presensi" class="nav-link text-left">
+            <div class="icon-class"> <i style="font-size:18px; padding:4px;" class="fas fa-calendar-check"></i> </div>
+            <span>Presensi</span>
+        </a>
+    </li>
+
     <li class="menu-header">PENGATURAN</li>
     <li class="dropdown ">
         <a href="/pengguna" class="nav-link text-left"><i style="font-size:18px; padding:4px;"

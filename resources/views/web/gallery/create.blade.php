@@ -37,7 +37,7 @@
                         </div>
                         <div class="form-group">
                             <label>Foto Gallery</label>
-                            <input type="file" class="form-control" name="foto[]" id="foto" multiple>
+                            <input type="file" class="form-control" name="foto[]" multiple>
                             @error('foto')
                                 <span style="color:red;font-size:13px;">{{ $message }}</span>
                             @enderror
@@ -60,6 +60,7 @@
     <script src="{{ asset('') }}otika/assets/bundles/sweetalert/sweetalert.min.js"></script>
     <!-- Page Specific JS File -->
     <script src="{{ asset('') }}otika/assets/js/page/sweetalert.js"></script>
+
 
     <script>
         $(document).ready(function() {

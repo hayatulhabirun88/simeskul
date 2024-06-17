@@ -29,14 +29,14 @@
                                 <option value="">Pilih Level</option>
                                 <option value="admin" {{ old('level', $pengguna->level) == 'admin' ? 'selected' : '' }}>
                                     Admin</option>
-                                <option value="pembina" {{ old('level', $pengguna->level) == 'pembina' ? 'selected' : '' }}>
-                                    Kepala Sekolah
-                                </option>
-                                <option value="orang_tua"
-                                    {{ old('level', $pengguna->level) == 'orang_tua' ? 'selected' : '' }}>Pembina
-                                </option>
                                 <option value="kepala_sekolah"
                                     {{ old('level', $pengguna->level) == 'kepala_sekolah' ? 'selected' : '' }}>
+                                    Kepala Sekolah</option>
+                                <option value="pembina" {{ old('level', $pengguna->level) == 'pembina' ? 'selected' : '' }}>
+                                    Pembina
+                                </option>
+                                <option value="orang_tua"
+                                    {{ old('level', $pengguna->level) == 'orang_tua' ? 'selected' : '' }}>
                                     Orang Tua</option>
                                 <option value="siswa" {{ old('level', $pengguna->level) == 'siswa' ? 'selected' : '' }}>
                                     Siswa</option>
