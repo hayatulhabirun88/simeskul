@@ -8,11 +8,23 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginMobileController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            if (auth()->check()) {
+                return redirect('mobile/dashboard');
+            }
+            return $next($request);
+        });
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
+        if (auth()->user()) {
+            return redirect('mobile/dashboard');
+        }
         return view('mobile.auth.login');
     }
 
@@ -26,19 +38,23 @@ class LoginMobileController extends Controller
             'password' => ['required'],
         ], [
             'email.required' => 'Email harus diisi',
-            'email.email' => 'Email anda tidak valid',
+            'email.email' => 'Format email tidak valid',
             'password.required' => 'Password harus diisi'
         ]);
 
-        if (Auth::attempt($credentials) && auth()->user()->level == "admin") {
-            $request->session()->regenerate();
+        if (Auth::attempt($credentials)) {
+            $user = Auth::user();
 
-            return redirect()->intended('mobile/dashboard');
+            if ($user->level == "siswa" || $user->level == "orang_tua") {
+                $request->session()->regenerate();
+
+                return redirect()->intended('mobile/dashboard');
+            } else {
+                Auth::logout();
+            }
         }
 
-        return back()->withErrors([
-            'email' => 'Email atau password salah!',
-        ])->onlyInput('email');
+        return redirect()->to('/mobile/login')->with('error', 'Email atau password anda salah!');
     }
 
     /**
@@ -88,4 +104,9 @@ class LoginMobileController extends Controller
     {
         //
     }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+
 }

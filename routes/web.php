@@ -1,5 +1,11 @@
 <?php
 
+use App\Http\Controllers\Mobile\EkstrakulikulerMobileController;
+use App\Http\Controllers\Mobile\InformasiMobileController;
+use App\Http\Controllers\Mobile\JadwalMobileController;
+use App\Http\Controllers\Mobile\PendaftarMobileController;
+use App\Http\Controllers\Mobile\PresensiMobileController;
+use App\Http\Controllers\Mobile\RegistrasiMobileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
@@ -16,6 +22,7 @@ use App\Http\Controllers\PendaftarController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\RegistrasiController;
 use App\Http\Controllers\EskulKategoriController;
+use App\Http\Controllers\Mobile\HomeMobileController;
 use App\Http\Controllers\Mobile\LoginMobileController;
 
 /*
@@ -122,6 +129,23 @@ Route::delete('/pengguna/{id}', [PenggunaController::class, 'destroy'])->name('d
 Route::get('/profil', [ProfilController::class, 'index'])->name('profil');
 
 
-// TAMPILAN MOBILE
+//  MOBILE LOGIN
 Route::get('/mobile/login', [LoginMobileController::class, 'index'])->name('mobile.login');
 Route::post('/mobile/login', [LoginMobileController::class, 'proses'])->name('mobile.proses.login');
+Route::get('/mobile/logout', [HomeMobileController::class, 'logout'])->name('mobile.logout');
+
+//  MOBILE REGISTRASI
+Route::get('/mobile/registrasi', [RegistrasiMobileController::class, 'index'])->name('mobile.registrasi');
+Route::get('/mobile/registrasi_siswa', [RegistrasiMobileController::class, 'siswa'])->name('mobile.registrasi.siswa');
+Route::get('/mobile/registrasi_orangtua', [RegistrasiMobileController::class, 'orang_tua'])->name('mobile.registrasi.orangtua');
+Route::post('/mobile/proses_registrasi_siswa', [RegistrasiMobileController::class, 'proses_registrasi_siswa'])->name('mobile.registrasi.proses.siswa');
+Route::post('/mobile/proses_registrasi_orang_tua', [RegistrasiMobileController::class, 'proses_registrasi_orang_tua'])->name('mobile.registrasi.proses.orangtua');
+
+//  MOBILE AFTER LOGIN
+Route::get('/mobile/dashboard', [HomeMobileController::class, 'index'])->name('mobile.dashboard');
+Route::get('/mobile/setting', [HomeMobileController::class, 'setting'])->name('mobile.setting');
+Route::get('/mobile/jadwal', [JadwalMobileController::class, 'index'])->name('mobile.jadwal');
+Route::get('/mobile/presensi', [PresensiMobileController::class, 'index'])->name('mobile.presensi');
+Route::get('/mobile/informasi', [InformasiMobileController::class, 'index'])->name('mobile.informasi');
+Route::get('/mobile/ekskul', [EkstrakulikulerMobileController::class, 'index'])->name('mobile.ekskul');
+Route::get('/mobile/dataeskul', [PendaftarMobileController::class, 'index'])->name('mobile.dataeskul');
