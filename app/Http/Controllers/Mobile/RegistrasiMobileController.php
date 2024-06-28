@@ -13,6 +13,7 @@ class RegistrasiMobileController extends Controller
 {
     public function __construct()
     {
+        // $this->middleware('check.dart');
         $this->middleware(function ($request, $next) {
             if (auth()->check()) {
                 return redirect('mobile/dashboard');

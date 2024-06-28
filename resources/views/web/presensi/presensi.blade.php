@@ -25,19 +25,25 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="mb-3">
-                                <label for="pembina" class="form-label">Pembina</label>
-                                <select class="form-control" name="pembina" id="pembina">
-                                    <option selected>Pilih Pembina</option>
-                                    @foreach ($pembina as $pembn)
-                                        <option value="{{ $pembn->id }}">{{ $pembn->nama_pembina }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
+
+                            @if (auth()->user()->level == 'pembina')
+                                <input type="hidden" value="{{ auth()->user()->pembina->id }}" name="pembina"
+                                    id="pembina">
+                            @else
+                                <div class="mb-3">
+                                    <label for="pembina" class="form-label">Pembina</label>
+                                    <select class="form-control" name="pembina" id="pembina">
+                                        <option selected>Pilih Pembina</option>
+                                        @foreach ($pembina as $pembn)
+                                            <option value="{{ $pembn->id }}">{{ $pembn->nama_pembina }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            @endif
                             <div class="mb-3">
                                 <label for="tgl_presensi" class="form-label">Tanggal Presensi</label>
                                 <input type="date" class="form-control" name="tgl_presensi" id="tgl_presensi"
-                                    placeholder="Tanggal Presensi" />
+                                    value="{{ date('Y-m-d') }}" placeholder="Tanggal Presensi" />
                             </div>
 
                         </div>

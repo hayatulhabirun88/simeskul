@@ -28,13 +28,20 @@ class LoginController extends Controller
             'password' => ['required'],
         ], [
             'email.required' => 'Email harus diisi',
-            'email.email' => 'Email anda tidak valid',
+            'email.email' => 'Format email tidak valid',
             'password.required' => 'Password harus diisi'
         ]);
 
-        if (Auth::attempt($credentials) && auth()->user()->level == "admin") {
-            $request->session()->regenerate();
-            return redirect()->intended('dashboard');
+        if (Auth::attempt($credentials)) {
+            $user = Auth::user();
+
+            if ($user->level == "admin" || $user->level == "pembina" || $user->level == "kepala_sekolah") {
+                $request->session()->regenerate();
+
+                return redirect()->intended('dashboard');
+            } else {
+                Auth::logout();
+            }
         }
 
         return back()->withErrors([

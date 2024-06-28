@@ -15,8 +15,11 @@
                     <div id="aniimated-thumbnials" class="list-unstyled row clearfix">
                         @foreach ($album->gallery as $albm)
                             <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-                                <a href="/foto/{{ $albm->foto }}" data-sub-html="Demo Description">
-                                    <img class="img-responsive thumbnail" src="/foto/{{ $albm->foto }}" alt="">
+                                <a href="{{ asset('/') }}{{ env('ASSET_UPLOAD') }}/foto/{{ $albm->foto }}"
+                                    data-sub-html="Demo Description">
+                                    <img class="img-responsive thumbnail"
+                                        src="{{ asset('/') }}{{ env('ASSET_UPLOAD') }}/foto/{{ $albm->foto }}"
+                                        alt="">
                                 </a>
                             </div>
                         @endforeach

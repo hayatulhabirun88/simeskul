@@ -11,7 +11,13 @@ class PendaftarController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(function ($request, $next) {
+            $user = auth()->user();
+            if ($user->level == 'siswa' || $user->level == 'orang_tua') {
+                return redirect('/mobile/dashboard');
+            }
+            return $next($request);
+        });
     }
 
     /**
@@ -142,5 +148,16 @@ class PendaftarController extends Controller
         $pendaftar->delete();
 
         return redirect()->to('/eskul/pendaftar')->with('success', 'Data berhasil di hapus');
+    }
+
+    public function search(Request $request)
+    {
+        $query = $request->input('cari');
+
+        // Lakukan pencarian di model Item
+        $pendaftar = Pendaftar::where('nama_lengkap', 'LIKE', "%{$query}%")
+            ->paginate(10);
+
+        return view('web.pendaftar.cari', compact('pendaftar'));
     }
 }

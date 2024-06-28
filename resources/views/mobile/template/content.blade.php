@@ -40,6 +40,7 @@
         <!-- ...:::Start User Event Section:::... -->
         <div class="header-section">
             <div class="container">
+                <br><br>
                 <!-- Start User Event Area -->
                 <div class="header-area">
                     <div class="header-top-area header-top-area--style-1">
@@ -137,6 +138,7 @@
 
         <!--  Start Offcanvas Profile Menu Section -->
         <div id="profile-menu-offcanvas" class="offcanvas offcanvas-rightside">
+            <br><br>
             <!-- Start Offcanvas Header -->
             <div class="offcanvas-header flex-start offcanvas-modify">
                 <button class="offcanvas-close" aria-label="offcanvas svg icon">
@@ -151,6 +153,7 @@
             </div> <!-- End Offcanvas Header -->
             <!-- Start Offcanvas Mobile Menu Wrapper -->
             <div class="offcanvas-profile-menu-wrapper">
+
                 <!-- ...:::Start Profile Card Section:::... -->
                 <div class="profile-card-section section-gap-top-25">
                     <div class="profile-card-wrapper">
@@ -175,10 +178,12 @@
 
                 <!-- ...:::Start Profile Details Section:::... -->
                 <div class="profile-details-section section-gap-top-30">
+
                     <div class="profile-details-wrapper">
                         <div class="profile-details-bottom">
                             <ul class="profile-user-list">
                                 <li class="profile-list-item">
+
                                     <ul class="profile-single-list">
 
                                         <li class="list-item">

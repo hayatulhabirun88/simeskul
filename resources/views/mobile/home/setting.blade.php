@@ -42,6 +42,7 @@
         <!-- ...:::Start User Event Section:::... -->
         <div class="header-section">
             <div class="container">
+                <br><br>
                 <!-- Start User Event Area -->
                 <div class="header-area">
                     <div class="header-top-area header-top-area--style-1">
@@ -247,9 +248,16 @@
 
                 <!-- Start User Event Area -->
                 <div class="login-wrapper">
-
-                    <form action="#" class="default-form-wrapper profile-wrapper">
-                        @if (auth()->user()->level == 'siswa')
+                    @if (session('success'))
+                        <div
+                            style="background-color:green; padding:10px; border-radius:5px; margin-top:20px; color:white;">
+                            <span>{{ session('success') }}</span>
+                        </div>
+                    @endif
+                    @if (auth()->user()->level == 'siswa')
+                        <form action="{{ route('mobile.setting.proses.siswa') }}" method="POST"
+                            class="default-form-wrapper">
+                            @csrf
                             <ul class="default-form-list">
                                 <li class="single-form-item">
                                     <label for="nama_lengkap" class="visually-hidden">Nama Lengkap</label>
@@ -374,12 +382,20 @@
                                     @enderror
                                 </li>
                             </ul>
-                        @else
+                            <input type="submit" name="submit" value="Save"
+                                class="btn btn--block btn--radius btn--size-xlarge btn--color-white btn--bg-maya-blue text-center register-space-top"
+                                style="width: 100%">
+                        </form>
+                    @else
+                        <form action="{{ route('mobile.setting.proses.orangtua') }}" method="POST"
+                            class="default-form-wrapper">
+                            @csrf
                             <ul class="default-form-list">
                                 <li class="single-form-item">
                                     <label for="nama_lengkap" class="visually-hidden">Nama Lengkap</label>
                                     <input type="text" id="nama_lengkap" name="nama_lengkap"
-                                        placeholder="Nama Lengkap" value="{{ old('nama_lengkap') }}">
+                                        placeholder="Nama Lengkap"
+                                        value="{{ old('nama_lengkap', @$datasetting->nama_orangtua) }}">
                                     <span class="icon"><i class="icon icon-carce-user"></i></span>
                                     @error('nama_lengkap')
                                         <span style="color:red; margin-left:70px;">{{ $message }}</span>
@@ -388,7 +404,7 @@
                                 <li class="single-form-item">
                                     <label for="pekerjaan" class="visually-hidden">Pekerjaan</label>
                                     <input type="text" id="pekerjaan" name="pekerjaan" placeholder="Pekerjaan"
-                                        value="{{ old('pekerjaan') }}">
+                                        value="{{ old('pekerjaan', @$datasetting->pekerjaan) }}">
                                     <span class="icon"><i class="icon icon-carce-user"></i></span>
                                     @error('pekerjaan')
                                         <span style="color:red; margin-left:70px;">{{ $message }}</span>
@@ -397,7 +413,7 @@
                                 <li class="single-form-item">
                                     <label for="alamat" class="visually-hidden">Alamat</label>
                                     <input type="text" id="alamat" name="alamat" placeholder="Alamat"
-                                        value="{{ old('alamat') }}">
+                                        value="{{ old('alamat', @$datasetting->alamat) }}">
                                     <span class="icon">
                                         <i class="icon icon-carce-user"></i>
                                     </span>
@@ -408,7 +424,7 @@
                                 <li class="single-form-item">
                                     <label for="no_hp" class="visually-hidden">No HP</label>
                                     <input type="text" id="no_hp" name="no_hp" placeholder="No HP"
-                                        value="{{ old('no_hp') }}">
+                                        value="{{ old('no_hp', @$datasetting->no_hp) }}">
                                     <span class="icon">
                                         <i class="icon icon-carce-user"></i>
                                     </span>
@@ -417,17 +433,9 @@
                                     @enderror
                                 </li>
                                 <li class="single-form-item">
-                                    <label for="siswa" class="visually-hidden">siswa</label>
-                                    <select
-                                        style="border: 2px solid #e2e7ea;border-radius: 10px;padding: 18px 25px 18px 80px;width: -webkit-fill-available; background-color:white; font-size: 14px;width: 100%;"
-                                        name="siswa" id="siswa">
-                                        <option value="">Pilih Siswa</option>
-                                        @foreach ($siswa as $sis)
-                                            <option value="{{ $sis->id }}"
-                                                {{ old('siswa') == $sis->id ? 'selected' : '' }}>
-                                                {{ $sis->nama_lengkap }} | Kelas:{{ $sis->kelas }}</option>
-                                        @endforeach
-                                    </select>
+                                    <label for="siswa" class="visually-hidden">Siswa</label>
+                                    <input type="text" id="siswa" placeholder="Siswa"
+                                        value="{{ old('siswa', @$datasetting->pendaftar->nama_lengkap) }}">
                                     <span class="icon">
                                         <i class="icon icon-carce-user"></i>
                                     </span>
@@ -435,11 +443,10 @@
                                         <span style="color:red; margin-left:70px;">{{ $message }}</span>
                                     @enderror
                                 </li>
-
                                 <li class="single-form-item">
                                     <label for="email" class="visually-hidden">Email</label>
                                     <input type="email" id="email" name="email" placeholder="Email"
-                                        value="{{ old('email') }}">
+                                        value="{{ old('email', auth()->user()->email) }}">
                                     <span class="icon"><i class="icon icon-carce-mail"></i></span>
                                     @error('email')
                                         <span style="color:red; margin-left:70px;">{{ $message }}</span>
@@ -464,10 +471,11 @@
                                     @enderror
                                 </li>
                             </ul>
-                        @endif
-                    </form>
-                    <a href="#"
-                        class="btn btn--block btn--radius btn--size-xlarge btn--color-white btn--bg-maya-blue text-center contact-btn">Save</a>
+                            <input type="submit" name="submit" value="Save"
+                                class="btn btn--block btn--radius btn--size-xlarge btn--color-white btn--bg-maya-blue text-center register-space-top"
+                                style="width: 100%">
+                        </form>
+                    @endif
                 </div>
 
             </div>

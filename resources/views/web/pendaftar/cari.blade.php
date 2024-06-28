@@ -17,16 +17,14 @@
                             <div class="mb-3">
                                 <form action="{{ route('eskul.pendaftar.search') }}" method="get" id="searchForm">
                                     <input type="text" class="form-control" name="cari" id="searchInput"
-                                        placeholder="Cari" />
+                                        placeholder="Cari" value="{{ old('cari', request('cari')) }}" />
                                 </form>
                             </div>
 
                         </div>
                         <div class="col-4">
-                            @if (auth()->user()->level == 'admin')
-                                <a type="submit" name="" id="" class="btn btn-primary float-right "
-                                    href="/eskul/pendaftar/create" role="button">Tambah</a>
-                            @endif
+                            <a type="submit" name="" id="" class="btn btn-primary float-right "
+                                href="/eskul/pendaftar/create" role="button">Tambah</a>
 
                         </div>
 

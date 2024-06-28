@@ -10,7 +10,13 @@ class PenggunaController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(function ($request, $next) {
+            $user = auth()->user();
+            if ($user->level == 'siswa' || $user->level == 'orang_tua') {
+                return redirect('/mobile/dashboard');
+            }
+            return $next($request);
+        });
     }
 
     /**

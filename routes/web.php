@@ -107,14 +107,13 @@ Route::delete('/eskul/gallery/{id}', [GalleryController::class, 'destroy'])->nam
 
 // JADWAL EKSTRAKULIKULER
 Route::get('/presensi', [PresensiController::class, 'index'])->name('presensi.index');
-Route::get('/presensi/create', [PresensiController::class, 'create'])->name('presensi.create');
 Route::post('/presensi', [PresensiController::class, 'store'])->name('presensi.store');
-Route::get('/presensi/{id}', [PresensiController::class, 'show'])->name('presensi.show');
-Route::get('/presensi/{id}/edit', [PresensiController::class, 'edit'])->name('presensi.edit');
-Route::get('/presensi/search', [PresensiController::class, 'search'])->name('presensi.search');
 Route::put('/presensi/{id}', [PresensiController::class, 'update'])->name('presensi.update');
 Route::delete('/presensi/{id}', [PresensiController::class, 'destroy'])->name('presensidestroy');
 Route::post('/presensi/ajax-update-presensi', [PresensiController::class, 'ajax_presensi'])->name('presensi.ajax');
+Route::get('/presensi/laporan', [PresensiController::class, 'laporan'])->name('presensi.laporan');
+Route::get('/presensi/filter-laporan', [PresensiController::class, 'filter_laporan'])->name('presensi.filter_laporan');
+Route::get('/presensi/laporan/all', [PresensiController::class, 'laporan_all'])->name('presensi.laporan_all');
 
 // PENGGUNA
 Route::get('/pengguna', [PenggunaController::class, 'index'])->name('pengguna');
@@ -144,6 +143,8 @@ Route::post('/mobile/proses_registrasi_orang_tua', [RegistrasiMobileController::
 //  MOBILE AFTER LOGIN
 Route::get('/mobile/dashboard', [HomeMobileController::class, 'index'])->name('mobile.dashboard');
 Route::get('/mobile/setting', [HomeMobileController::class, 'setting'])->name('mobile.setting');
+Route::post('/mobile/setting_proses_siswa', [HomeMobileController::class, 'proses_siswa'])->name('mobile.setting.proses.siswa');
+Route::post('/mobile/setting_proses_orangtua', [HomeMobileController::class, 'proses_orangtua'])->name('mobile.setting.proses.orangtua');
 Route::get('/mobile/jadwal', [JadwalMobileController::class, 'index'])->name('mobile.jadwal');
 Route::get('/mobile/presensi', [PresensiMobileController::class, 'index'])->name('mobile.presensi');
 Route::get('/mobile/informasi', [InformasiMobileController::class, 'index'])->name('mobile.informasi');

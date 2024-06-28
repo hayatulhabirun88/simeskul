@@ -56,11 +56,11 @@
                                     <div class="form-group">
                                         <div class="d-block">
                                             <label for="password" class="control-label">Password</label>
-                                            <div class="float-right">
+                                            {{-- <div class="float-right">
                                                 <a href="/lupa-password" class="text-small">
                                                     Lupa Password?
                                                 </a>
-                                            </div>
+                                            </div> --}}
                                         </div>
                                         <input id="password" type="password" class="form-control" name="password"
                                             tabindex="2" required>
@@ -77,9 +77,9 @@
 
                             </div>
                         </div>
-                        <div class="mt-5 text-muted text-center">
+                        {{-- <div class="mt-5 text-muted text-center">
                             Belum punya akun? <a href="/daftar">Daftar</a>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>

@@ -4,13 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Pembina;
+use App\Models\Pendaftar;
 use Illuminate\Http\Request;
 
 class PembinaController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(function ($request, $next) {
+            $user = auth()->user();
+            if ($user->level == 'siswa' || $user->level == 'orang_tua') {
+                return redirect('/mobile/dashboard');
+            }
+            return $next($request);
+        });
     }
 
     /**
@@ -111,5 +118,16 @@ class PembinaController extends Controller
         $pembina->delete();
 
         return redirect()->to('/pembina')->with('success', 'Data berhasil di hapus');
+    }
+
+    public function search(Request $request)
+    {
+        $query = $request->input('cari');
+
+        // Lakukan pencarian di model Item
+        $pembina = Pembina::where('nama_pembina', 'LIKE', "%{$query}%")
+            ->paginate(10);
+
+        return view('web.pembina.cari', compact('pembina'));
     }
 }

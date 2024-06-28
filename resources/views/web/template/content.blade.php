@@ -16,6 +16,7 @@
     <!-- Custom style CSS -->
     <link rel="stylesheet" href="{{ asset('/') }}otika/assets/css/custom.css">
     <link rel='shortcut icon' type='image/x-icon' href='{{ asset('/') }}otika/assets/img/favicon.ico' />
+    <link rel="stylesheet" href="{{ asset('/') }}otika/assets/bundles/izitoast/css/iziToast.min.css">
     @stack('style')
 </head>
 
@@ -47,6 +48,29 @@
             @include('web.template.footer');
         </div>
     </div>
+    <script src="{{ asset('/') }}otika/assets/bundles/izitoast/js/iziToast.min.js"></script>
+    @if (session('success'))
+        <script>
+            $(document).ready(function() {
+
+                iziToast.success({
+                    title: 'Sukses!',
+                    message: `{{ session('success') }}`,
+                    position: 'topRight'
+                });
+            });
+        </script>
+    @elseif(session('error'))
+        <script>
+            $(document).ready(function() {
+                iziToast.error({
+                    title: 'error!',
+                    message: `{{ session('error') }}`,
+                    position: 'topRight'
+                });
+            });
+        </script>
+    @endif
     <!-- General JS Scripts -->
     <script src="{{ asset('/') }}otika/assets/js/app.min.js"></script>
     <!-- Page Specific JS File -->

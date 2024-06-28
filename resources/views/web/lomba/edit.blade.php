@@ -72,7 +72,9 @@
                         </div>
                         <div class="col-md-4">
                             <label for="foto_lomba">Foto Lomba</label>
-                            <img width="100%" src="/foto_lomba/{{ $lomba->foto_utama }}" alt="">
+                            <img width="100%"
+                                src="{{ asset('/') }}{{ env('ASSET_UPLOAD') }}/foto_lomba/{{ $lomba->foto_utama }}"
+                                alt="">
                         </div>
                     </div>
 

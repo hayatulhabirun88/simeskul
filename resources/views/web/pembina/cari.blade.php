@@ -1,7 +1,7 @@
 @extends('web.template.content')
 
 @section('title')
-    Daftar Lomba
+    Daftar Pembina
 @endsection
 
 @section('content')
@@ -9,22 +9,22 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4>Daftar Lomba</h4>
+                    <h4>Daftar Pembina</h4>
                 </div>
                 <div class="card-body">
                     <div class="row mb-3">
                         <div class="col-8">
                             <div class="mb-3">
-                                <form action="{{ route('eskul.lomba.search') }}" method="get" id="searchForm">
+                                <form action="{{ route('pembina.search') }}" method="get" id="searchForm">
                                     <input type="text" class="form-control" name="cari" id="searchInput"
-                                        placeholder="Cari" />
+                                        placeholder="Cari" value="{{ old('cari', request('cari')) }}" />
                                 </form>
                             </div>
 
                         </div>
                         <div class="col-4">
                             <a type="submit" name="" id="" class="btn btn-primary float-right "
-                                href="/eskul/lomba/create" role="button">Tambah</a>
+                                href="/pembina/create" role="button">Tambah</a>
 
                         </div>
 
@@ -35,39 +35,32 @@
                             <thead>
                                 <tr>
                                     <th width="50">No</th>
-                                    <th>Judul</th>
-                                    <th>Tempat</th>
-                                    <th>Tanggal Mulai</th>
-                                    <th>Tanggal Selesai</th>
-                                    <th>Deskripsi</th>
-                                    <th>Foto</th>
+                                    <th>Nama Pembina</th>
+                                    <th>Email</th>
+                                    <th>Alamat</th>
+                                    <th>No HP</th>
                                     <th width="150">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($lomba as $index => $lmb)
+                                @foreach ($pembina as $index => $pemb)
                                     <tr>
-                                        <td>{{ $index + $lomba->firstItem() }}</td>
-                                        <td>{{ $lmb->judul_lomba }}</td>
-                                        <td>{{ $lmb->tempat }}</td>
-                                        <td>{{ $lmb->tgl_mulai }}</td>
-                                        <td>{{ $lmb->tgl_selesai }}</td>
-                                        <td>{{ $lmb->deskripsi }}</td>
-                                        <td><img width="50"
-                                                src="{{ asset('/') }}{{ env('ASSET_UPLOAD') }}/foto_lomba/{{ $lmb->foto_utama }}"
-                                                alt="">
+                                        <td>{{ $index + $pembina->firstItem() }}</td>
+                                        <td>{{ $pemb->nama_pembina }}</td>
+                                        <td>{{ $pemb->user->email }}</td>
+                                        <td>{{ $pemb->alamat }}</td>
+                                        <td>{{ $pemb->no_hp }}</td>
                                         </td>
                                         <td>
-                                            <a href="/eskul/lomba/{{ $lmb->id }}/edit"
-                                                class="btn btn-sm btn-warning"><i class="far fa-edit"></i></a>
-                                            <form action="{{ route('eskul.lombadestroy', $lmb->id) }}"
-                                                style="display:inline" method="POST"
-                                                id="deletelombaForm-{{ $lmb->id }}">
+                                            <a href="/pembina/{{ $pemb->id }}/edit" class="btn btn-sm btn-warning"><i
+                                                    class="far fa-edit"></i></a>
+                                            <form action="{{ route('pembinadestroy', $pemb->id) }}" style="display:inline"
+                                                method="POST" id="deletepembinaForm-{{ $pemb->id }}">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-sm btn-danger hapus-lomba-btn"
-                                                    data-nama-lmb="{{ $lmb->judul_lomba }}"
-                                                    data-form-id="deletelombaForm-{{ $lmb->id }}">
+                                                <button type="submit" class="btn btn-sm btn-danger hapus-pembina-btn"
+                                                    data-nama-pemb="{{ $pemb->nama_pembina }}"
+                                                    data-form-id="deletepembinaForm-{{ $pemb->id }}">
                                                     <i class="fas fa-trash"></i>
                                                 </button>
                                             </form>
@@ -79,20 +72,20 @@
                     </div>
                     <div class="pagination justify-content-end ">
                         <ul class="pagination">
-                            <li class="page-item {{ $lomba->onFirstPage() ? 'disabled' : '' }}">
-                                <a class="page-link" href="{{ $lomba->previousPageUrl() }}" aria-label="Previous">
+                            <li class="page-item {{ $pembina->onFirstPage() ? 'disabled' : '' }}">
+                                <a class="page-link" href="{{ $pembina->previousPageUrl() }}" aria-label="Previous">
                                     <span aria-hidden="true">&laquo;</span>
                                 </a>
                             </li>
 
-                            @foreach ($lomba->getUrlRange(1, $lomba->lastPage()) as $page => $url)
-                                <li class="page-item {{ $page == $lomba->currentPage() ? 'active' : '' }}">
+                            @foreach ($pembina->getUrlRange(1, $pembina->lastPage()) as $page => $url)
+                                <li class="page-item {{ $page == $pembina->currentPage() ? 'active' : '' }}">
                                     <a class="page-link" href="{{ $url }}">{{ $page }}</a>
                                 </li>
                             @endforeach
 
-                            <li class="page-item {{ $lomba->hasMorePages() ? '' : 'disabled' }}">
-                                <a class="page-link" href="{{ $lomba->nextPageUrl() }}" aria-label="Next">
+                            <li class="page-item {{ $pembina->hasMorePages() ? '' : 'disabled' }}">
+                                <a class="page-link" href="{{ $pembina->nextPageUrl() }}" aria-label="Next">
                                     <span aria-hidden="true">&raquo;</span>
                                 </a>
                             </li>
@@ -125,14 +118,14 @@
             });
 
 
-            $(".hapus-lomba-btn").click(function(e) {
+            $(".hapus-pembina-btn").click(function(e) {
                 e.preventDefault();
                 var formId = $(this).data('form-id');
-                var lombaName = $(this).data('nama-lmb');
+                var pembinaName = $(this).data('nama-pemb');
 
                 swal({
                     title: 'Apakah anda yakin?',
-                    text: 'Akan menghapus lomba ' + lombaName + ' !',
+                    text: 'Akan menghapus pembina ' + pembinaName + ' !',
                     icon: 'warning',
                     buttons: true,
                     dangerMode: true,

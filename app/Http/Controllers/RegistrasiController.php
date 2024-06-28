@@ -13,6 +13,9 @@ class RegistrasiController extends Controller
      */
     public function index()
     {
+        if (auth()->user()) {
+            return redirect('dashboard');
+        }
         return view('web.registrasi.registrasi');
     }
 
