@@ -77,7 +77,8 @@
                                 <div class="card-content">
                                     <h5 class="font-15">Presensi</h5>
                                     <h2 class="mb-3 font-18">
-                                        {{ \App\Models\Presensi::where('tgl_presensi', date('Y-m-d'))->count() }}</h2>
+                                        {{ \App\Models\Presensi::count() }}
+                                    </h2>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
