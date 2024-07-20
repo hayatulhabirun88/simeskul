@@ -110,7 +110,6 @@ class PenggunaController extends Controller
     {
         $user = User::findOrFail($id);
 
-        @unlink(public_path('/images/' . $user->dok_ktp));
         $user->delete();
 
         return redirect()->to('pengguna')->with('success', 'Data berhasil di hapus');

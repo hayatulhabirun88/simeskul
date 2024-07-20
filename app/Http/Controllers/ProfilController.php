@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class ProfilController extends Controller
 {
@@ -53,9 +55,36 @@ class ProfilController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+
+    public function update($id, Request $request)
     {
-        //
+        $request->validate([
+            'nama_lengkap' => 'required|string|max:255',
+            'email' => 'required|lowercase|email|max:255|string|unique:users,email,' . auth()->user()->id,
+            'level' => 'required',
+            'foto' => 'image|mimes:jpg,jpeg,gif,png'
+        ]);
+
+        $user = User::find($id);
+        $user->name = $request->input('nama_lengkap');
+        $user->email = $request->input('email');
+
+        if ($request->filled('password')) {
+            $user->password = bcrypt($request->input('password'));
+        }
+
+        $user->level = $request->input('level');
+
+        if ($request->hasFile('foto')) {
+            $file = $request->file('foto');
+            $filename = md5(time()) . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('foto_user'), $filename);
+            $user->foto = $filename;
+        }
+
+        $user->save();
+
+        return redirect()->route('profil')->with('success', 'Profil berhasil diperbarui.');
     }
 
     /**

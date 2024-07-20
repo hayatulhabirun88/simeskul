@@ -13,11 +13,25 @@
     </div>
     <ul class="navbar-nav navbar-right">
         <li class="dropdown"><a href="#" data-toggle="dropdown"
-                class="nav-link dropdown-toggle nav-link-lg nav-link-user"> <img alt="image"
-                    src="{{ asset('/') }}otika/assets/img/user.png" class="user-img-radious-style">
-                <span class="d-sm-none d-lg-inline-block"></span></a>
+                class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+                @if (auth()->user()->foto)
+                    <img alt="image"
+                        src="{{ asset('/') }}{{ env('ASSET_UPLOAD') }}foto_user/{{ auth()->user()->foto }}"
+                        class="user-img-radious-style">
+                @else
+                    <img alt="image" src="{{ asset('/') }}{{ env('ASSET_UPLOAD') }}fotouser.jpg"
+                        class="user-img-radious-style">
+                @endif
+
+
+                <span class="d-sm-none d-lg-inline-block"></span>
+            </a>
             <div class="dropdown-menu dropdown-menu-right pullDown">
                 <div class="dropdown-title">Hello {{ auth()->user()->name }}</div>
+                <a href="profil" class="dropdown-item has-icon"> <i class="far
+                    fa-user"></i>
+                    Profile
+                </a>
                 <a href="/logout" class="dropdown-item has-icon text-danger"> <i class="fas fa-sign-out-alt"></i>
                     Logout
                 </a>

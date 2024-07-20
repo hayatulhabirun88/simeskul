@@ -126,6 +126,7 @@ Route::delete('/pengguna/{id}', [PenggunaController::class, 'destroy'])->name('d
 
 //PROFIL
 Route::get('/profil', [ProfilController::class, 'index'])->name('profil');
+Route::put('/profil/{id}', [ProfilController::class, 'update'])->name('profil.update');
 
 
 //  MOBILE LOGIN

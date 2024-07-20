@@ -70,6 +70,11 @@
         </li>
     @endif
     <li class="dropdown ">
+        <a href="/profil" class="nav-link text-left">
+            <i style="font-size:18px; padding:4px;" class="far
+                    fa-user"></i><span>Profil</span></a>
+    </li>
+    <li class="dropdown ">
         <a href="/logout" class="nav-link text-left">
             <i class="fas fa-sign-out-alt" style="font-size:18px; padding:4px;"></i>
             <span>Logout</span></a>
