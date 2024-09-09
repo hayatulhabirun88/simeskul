@@ -40,12 +40,23 @@ class EskulKategoriController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama_eskul' => 'required|string'
+            'nama_eskul' => 'required|string',
+            'icon' => 'required|image|mimes:jpg,png,gif,jpeg',
+            'deskripsi' => 'required|string|max:255',
         ]);
+
+        if ($request->file('icon')) {
+            $namafile = md5($request->file('icon')->getClientOriginalName() . time()) . '.' . $request->file('icon')->getClientOriginalExtension();
+            $request->file('icon')->move(public_path() . '/icon/', $namafile);
+        } else {
+            $namafile = "";
+        }
 
 
         Ekstrakulikuler::create([
-            'nama_ekstrakulikuler' => $request->nama_eskul
+            'nama_ekstrakulikuler' => $request->nama_eskul,
+            'icon' => $namafile,
+            'deskripsi' => $request->deskripsi,
         ]);
 
         return redirect()->to('/eskul/kategori')->with('success', 'Kategori Ekskul Berhasil di Tambah');
@@ -73,13 +84,24 @@ class EskulKategoriController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $ekstrakulikuler = Ekstrakulikuler::findOrFail($id);
+
         $request->validate([
-            'nama_eskul' => 'required|string'
+            'nama_eskul' => 'required|string',
+            'icon' => 'image|mimes:jpg,png,gif,jpeg',
+            'deskripsi' => 'required|string|max:255',
         ]);
 
-        Ekstrakulikuler::findOrFail($id)->update([
-            'nama_ekstrakulikuler' => $request->nama_eskul
-        ]);
+        if ($request->file('icon')) {
+            @unlink(public_path('/icon/' . $ekstrakulikuler->icon));
+            $namafile = md5($request->file('icon')->getClientOriginalName() . time()) . '.' . $request->file('icon')->getClientOriginalExtension();
+            $request->file('icon')->move(public_path() . '/icon/', $namafile);
+            $ekstrakulikuler->icon = $namafile;
+        }
+
+        $ekstrakulikuler->nama_ekstrakulikuler = $request->nama_eskul;
+        $ekstrakulikuler->deskripsi = $request->deskripsi;
+        $ekstrakulikuler->update();
 
         return redirect()->to('/eskul/kategori')->with('success', 'Kategori Ekskul Berhasil di Ubah');
     }

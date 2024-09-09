@@ -12,12 +12,26 @@
                     <h4>Tambah Ekstrakulikuler</h4>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('eskul.kategori.store') }}" method="post">
+                    <form action="{{ route('eskul.kategori.store') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
                             <label>Nama Ekstrakulikuler</label>
                             <input type="text" class="form-control" name="nama_eskul">
                             @error('nama_eskul')
+                                <span style="color:red;font-size:13px;">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label>Icon</label>
+                            <input type="file" class="form-control" name="icon">
+                            @error('icon')
+                                <span style="color:red;font-size:13px;">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label>Deskripsi</label>
+                            <textarea class="form-control" name="deskripsi"></textarea>
+                            @error('deskripsi')
                                 <span style="color:red;font-size:13px;">{{ $message }}</span>
                             @enderror
                         </div>

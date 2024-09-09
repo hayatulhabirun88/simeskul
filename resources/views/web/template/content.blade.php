@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="{{ asset('/') }}otika/assets/css/components.css">
     <!-- Custom style CSS -->
     <link rel="stylesheet" href="{{ asset('/') }}otika/assets/css/custom.css">
-    <link rel='shortcut icon' type='image/x-icon' href='{{ asset('/') }}otika/assets/img/favicon.ico' />
+    <link rel='shortcut icon' type='image/x-icon' href='{{ asset('/') }}logo.png' />
     <link rel="stylesheet" href="{{ asset('/') }}otika/assets/bundles/izitoast/css/iziToast.min.css">
     @stack('style')
 </head>

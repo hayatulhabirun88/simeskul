@@ -12,7 +12,8 @@
                     <h4>Edit Ekstrakulikuler</h4>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('eskul.kategori.update', $ekstrakulikuler->id) }}" method="post">
+                    <form action="{{ route('eskul.kategori.update', $ekstrakulikuler->id) }}" method="post"
+                        enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="form-group">
@@ -20,6 +21,21 @@
                             <input type="text" class="form-control" name="nama_eskul"
                                 value="{{ old('nama_eskul', $ekstrakulikuler->nama_ekstrakulikuler) }}">
                             @error('nama_eskul')
+                                <span style="color:red;font-size:13px;">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label>Icon</label>
+                            <input type="file" class="form-control" name="icon"
+                                value="{{ old('icon', $ekstrakulikuler->icon) }}">
+                            @error('icon')
+                                <span style="color:red;font-size:13px;">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label>Deskripsi</label>
+                            <textarea class="form-control" name="deskripsi" id="" rows="3">{{ old('deskripsi', $ekstrakulikuler->deskripsi) }}</textarea>
+                            @error('deskripsi')
                                 <span style="color:red;font-size:13px;">{{ $message }}</span>
                             @enderror
                         </div>

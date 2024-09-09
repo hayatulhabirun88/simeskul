@@ -40,11 +40,22 @@
             <div class="product-wrapper">
                 <div class="product-wrapper-content--4">
                     @foreach ($ekstrakulikuler as $eks)
-                        <div id="single-product-item" class="single-product-item product-item--style-4">
-                            <div>
-                                <strong>{{ $eks->nama_ekstrakulikuler }} </strong><br>
+                        <li class="single-cart-item" style="margin-top:10px">
+                            <div class="image">
+                                <img width="90" height="90" src="{{ asset('/') }}icon/{{ $eks->icon }}"
+                                    alt="image">
                             </div>
-                        </div>
+                            <div class="content">
+                                <a href="{{ asset('/') }}mobile/ekskul/{{ $eks->id }}/detail"
+                                    class="title">{{ substr($eks->deskripsi, 0, 80) . ' ...' }}</a>
+                                <div class="details">
+                                    <div class="left">
+                                        <span class="redbook">
+                                            <strong>{{ $eks->nama_ekstrakulikuler }}</strong></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
                     @endforeach
                 </div>
 

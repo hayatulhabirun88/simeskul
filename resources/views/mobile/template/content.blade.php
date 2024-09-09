@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zxx">
+<html lang="id">
 
 <head>
 
@@ -27,10 +27,13 @@
 
     <!-- Plugin CSS -->
     <link rel="stylesheet" href="{{ asset('/') }}carce/carce/assets/css/plugins/swiper-bundle.min.css">
+    {{-- <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" /> --}}
     <link rel="stylesheet" href="{{ asset('/') }}carce/carce/assets/css/plugins/ion.rangeSlider.min.css">
 
     <!-- Style CSS -->
     <link rel="stylesheet" href="{{ asset('/') }}carce/carce/assets/css/style.css">
+    <!-- Bootstrap CSS -->
+    @stack('style')
 
 </head>
 
@@ -361,13 +364,27 @@
         <footer class="footer-section"></footer>
     </main>
 
+    <script>
+        var swiper = new Swiper('.swiper', {
+            loop: true, // Slider akan kembali ke slide pertama setelah slide terakhir
+            autoplay: {
+                delay: 3000, // Durasi antar slide dalam milidetik (3 detik)
+                disableOnInteraction: false, // Tetap berjalan setelah interaksi pengguna
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+        });
+    </script>
+
     <!-- ::::::::::::::All JS Files here :::::::::::::: -->
     <!-- Global Vendor -->
     <script src="{{ asset('/') }}carce/carce/assets/js/vendor/modernizr-3.11.2.min.js"></script>
     <script src="{{ asset('/') }}carce/carce/assets/js/vendor/jquery-3.6.0.min.js"></script>
     <script src="{{ asset('/') }}carce/carce/assets/js/vendor/jquery-migrate-3.3.2.min.js"></script>
 
-    <!--Plugins JS-->
+
     <script src="{{ asset('/') }}carce/carce/assets/js/plugins/swiper-bundle.min.js"></script>
     <script src="{{ asset('/') }}carce/carce/assets/js/plugins/ion.rangeSlider.min.js"></script>
 
@@ -378,6 +395,9 @@
     <!--Main JS (Common Activation Codes)-->
     <script src="{{ asset('/') }}carce/carce/assets/js/main.js"></script>
     <!-- <script src="{{ asset('/') }}carce/carce/assets/js/main.min.js"></script> -->
+
+
+
 
     <script>
         function filterFunction(that, event) {
@@ -491,6 +511,7 @@
         })
     </script>
 
+    @stack('script')
 </body>
 
 </html>

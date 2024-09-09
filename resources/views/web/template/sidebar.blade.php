@@ -20,6 +20,12 @@
         </li>
     @endif
     <li class="dropdown ">
+        <a href="/kegiatan" class="nav-link text-left">
+            <div class="icon-class"> <i style="font-size:18px; padding:4px;" class="fas fa-play"></i> </div>
+            <span>Kegiatan</span>
+        </a>
+    </li>
+    <li class="dropdown ">
         <a href="/eskul/pendaftar" class="nav-link text-left">
             <div class="icon-class"> <i style="font-size:18px; padding:4px;" class="fas fa-users"></i> </div>
             <span>Pendaftar</span>

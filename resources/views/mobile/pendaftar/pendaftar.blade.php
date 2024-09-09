@@ -18,7 +18,6 @@
 @endsection
 
 @section('content')
-    <!-- ...:::Start Catagories - 1 Section:::... -->
     <div class="catagories-section section-gap-top-50">
         <div class="container">
             <div class="catagories-area">
@@ -40,18 +39,53 @@
             <div class="product-wrapper">
                 <div class="product-wrapper-content--4">
                     @foreach ($pendaftar as $pdf)
-                        <div id="single-product-item" class="single-product-item product-item--style-4">
-                            <div>
-                                <strong>{{ $pdf->nama_lengkap }} | {{ $pdf->kelas }} | {{ $pdf->alamat }}</strong><br>
+                        <li class="single-cart-item" style="margin-top:10px">
+                            <div class="image">
+                                <img width="90" height="90" src="{{ asset('/') }}user.png" alt="image">
                             </div>
-                        </div>
+                            <div class="content">
+                                <div class="details">
+                                    <div class="left">
+                                        <span class="redbook"><strong>{{ $pdf->nama_lengkap }}</strong></span>
+
+                                    </div>
+                                    <div class="right"><strong>{{ $pdf->kelas }}</strong></div>
+                                </div>
+                                Alamat: {{ $pdf->alamat }}
+
+                            </div>
+                        </li>
                     @endforeach
                 </div>
-
             </div>
+            <nav style="margin-top:10px;">
+                <ul class="pagination" style="text-align: center; ">
+                    <!-- Tombol "Previous" -->
+                    @if ($pendaftar->onFirstPage())
+                        <li class="page-item disabled"><span class="page-link"
+                                style="padding:4px; border-radius:3px; margin:3px; background-color:#007aff; color:white;">Previous</span>
+                        </li>
+                    @else
+                        <li class="page-item"><a class="page-link"
+                                style="padding:4px; border-radius:3px;margin:3px; background-color:#007aff; color:white;"
+                                href="{{ $pendaftar->previousPageUrl() }}">Previous</a>
+                        </li>
+                    @endif
+
+                    <!-- Tombol "Next" -->
+                    @if ($pendaftar->hasMorePages())
+                        <li class="page-item"><a class="page-link"
+                                style="padding:4px; border-radius:3px;margin:3px; background-color:#007aff; color:white;"
+                                href="{{ $pendaftar->nextPageUrl() }}">Next</a></li>
+                    @else
+                        <li class="page-item disabled"><span
+                                style="padding:4px; border-radius:3px; margin:3px; background-color:#007aff; color:white;"
+                                class="page-link">Next</span></li>
+                    @endif
+                </ul>
+            </nav>
 
         </div>
     </div><br><br>
-    <!-- ...:::Start Catagories - 1 Section:::... -->
 
 @endsection

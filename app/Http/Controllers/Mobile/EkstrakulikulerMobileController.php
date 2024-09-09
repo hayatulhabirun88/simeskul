@@ -23,4 +23,10 @@ class EkstrakulikulerMobileController extends Controller
         $ekstrakulikuler = Ekstrakulikuler::all();
         return view('mobile.ekskul.ekskul', compact(['ekstrakulikuler']));
     }
+
+    public function detail($id)
+    {
+        $ekstrakulikuler = Ekstrakulikuler::findOrFail($id);
+        return view('mobile.ekskul.detail', compact(['ekstrakulikuler']));
+    }
 }

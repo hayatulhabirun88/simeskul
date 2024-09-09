@@ -1,6 +1,6 @@
 @extends('mobile.template.content')
 
-@section('title', 'Jadwal')
+@section('title', 'Kegiatan')
 
 @section('list-item')
 
@@ -33,35 +33,35 @@
                     </div>
                 </div>
             </div>
-
-            <div class="title-content">
-                <h2 class="title">Jadwal</h2>
-            </div>
-            <div class="product-wrapper">
-                <div class="product-wrapper-content--4">
-                    @foreach ($jadwal as $jdw)
-                        <li class="single-cart-item" style="margin-top:10px">
-                            <div class="image">
-                                <img width="90" height="90"
-                                    src="{{ asset('/') }}icon/{{ $jdw->ekstrakulikuler->icon }}" alt="image">
-                            </div>
-                            <div class="content">
-                                Bertempat di <strong>{{ $jdw->tempat }}</strong> mulai
-                                {{ $jdw->jam_mulai }} WITA selesai {{ $jdw->jam_selesai }} WITA
-                                <div class="details">
-                                    <div class="left">
-                                        <span class="redbook">
-                                            <strong>Ekstrakulikuler
-                                                {{ $jdw->ekstrakulikuler->nama_ekstrakulikuler }}</strong></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                    @endforeach
+            @foreach ($kegiatan as $kgt)
+                <div class="single-product-item product-item--style-3" style="margin-top:10px;">
+                    <div class="image">
+                        <a href="single-product.html">
+                            <img width="100%" class="img-fluid"
+                                src="{{ asset('/') }}foto_kegiatan/{{ $kgt->foto_kegiatan }}" alt="image">
+                        </a>
+                        <a href="wishlist.html" aria-label="Wishlist"
+                            class="btn btn--size-33-33 btn--center btn--round btn--color-radical-red btn--bg-white btn--box-shadow"><i
+                                class="icon icon-carce-heart"></i></a>
+                    </div>
+                    <div class="content">
+                        <div class="content--left">
+                            <a href="single-product.html" class="title">{{ $kgt->deskripsi }}</a>
+                            <span class="price">{{ $kgt->nama_kegiatan }}</span>
+                        </div>
+                        <div class="content--right">
+                            <span
+                                class="review-star-text">{{ \App\Models\Ekstrakulikuler::find($kgt->ekstrakulikuler_id)->nama_ekstrakulikuler }}</span>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            @endforeach
 
         </div>
+
+    </div>
+
+    </div>
     </div><br><br>
     <!-- ...:::Start Catagories - 1 Section:::... -->
 

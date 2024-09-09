@@ -1,6 +1,6 @@
 @extends('mobile.template.content')
 
-@section('title', 'Jadwal')
+@section('title', 'Ekstrakulikuler')
 
 @section('list-item')
 
@@ -21,7 +21,7 @@
     <!-- ...:::Start Catagories - 1 Section:::... -->
     <div class="catagories-section section-gap-top-50">
         <div class="container">
-            <div class="catagories-area">
+            {{-- <div class="catagories-area">
                 <div class="catagories-nav-1">
                     <!-- Slider main container -->
                     <div class="swiper">
@@ -32,37 +32,26 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
             <div class="title-content">
-                <h2 class="title">Jadwal</h2>
+                <h2 class="title">{{ $ekstrakulikuler->nama_ekstrakulikuler }}</h2>
             </div>
-            <div class="product-wrapper">
-                <div class="product-wrapper-content--4">
-                    @foreach ($jadwal as $jdw)
-                        <li class="single-cart-item" style="margin-top:10px">
-                            <div class="image">
-                                <img width="90" height="90"
-                                    src="{{ asset('/') }}icon/{{ $jdw->ekstrakulikuler->icon }}" alt="image">
-                            </div>
-                            <div class="content">
-                                Bertempat di <strong>{{ $jdw->tempat }}</strong> mulai
-                                {{ $jdw->jam_mulai }} WITA selesai {{ $jdw->jam_selesai }} WITA
-                                <div class="details">
-                                    <div class="left">
-                                        <span class="redbook">
-                                            <strong>Ekstrakulikuler
-                                                {{ $jdw->ekstrakulikuler->nama_ekstrakulikuler }}</strong></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                    @endforeach
+            <div class="single-product-item product-item--style-3" style="margin-top:10px;">
+                <div class="image">
+                    <a href="single-product.html">
+                        <img width="100%" class="img-fluid" src="{{ asset('/') }}icon/{{ $ekstrakulikuler->icon }}"
+                            alt="image">
+                    </a>
+                </div>
+                <div class="content">
+                    <div class="content--left">
+                        <a href="single-product.html" class="title">{{ $ekstrakulikuler->deskripsi }}</a>
+                    </div>
                 </div>
             </div>
 
         </div>
     </div><br><br>
     <!-- ...:::Start Catagories - 1 Section:::... -->
-
 @endsection

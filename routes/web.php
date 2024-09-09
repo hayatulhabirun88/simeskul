@@ -1,11 +1,6 @@
 <?php
 
-use App\Http\Controllers\Mobile\EkstrakulikulerMobileController;
-use App\Http\Controllers\Mobile\InformasiMobileController;
-use App\Http\Controllers\Mobile\JadwalMobileController;
-use App\Http\Controllers\Mobile\PendaftarMobileController;
-use App\Http\Controllers\Mobile\PresensiMobileController;
-use App\Http\Controllers\Mobile\RegistrasiMobileController;
+use App\Http\Controllers\Mobile\KegiatanMobileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
@@ -16,6 +11,7 @@ use App\Http\Controllers\BookingController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\PembinaController;
 use App\Http\Controllers\DatakostController;
+use App\Http\Controllers\KegiatanController;
 use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\PresensiController;
 use App\Http\Controllers\PendaftarController;
@@ -24,6 +20,12 @@ use App\Http\Controllers\RegistrasiController;
 use App\Http\Controllers\EskulKategoriController;
 use App\Http\Controllers\Mobile\HomeMobileController;
 use App\Http\Controllers\Mobile\LoginMobileController;
+use App\Http\Controllers\Mobile\JadwalMobileController;
+use App\Http\Controllers\Mobile\PresensiMobileController;
+use App\Http\Controllers\Mobile\InformasiMobileController;
+use App\Http\Controllers\Mobile\PendaftarMobileController;
+use App\Http\Controllers\Mobile\RegistrasiMobileController;
+use App\Http\Controllers\Mobile\EkstrakulikulerMobileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -124,6 +126,15 @@ Route::get('/pengguna/{id}/edit', [PenggunaController::class, 'edit'])->name('ed
 Route::put('/pengguna/{id}', [PenggunaController::class, 'update'])->name('update.pengguna');
 Route::delete('/pengguna/{id}', [PenggunaController::class, 'destroy'])->name('destroy.pengguna');
 
+// KEGIATAN
+Route::get('/kegiatan', [KegiatanController::class, 'index'])->name('kegiatan');
+Route::get('/kegiatan/create', [KegiatanController::class, 'create'])->name('create.kegiatan');
+Route::post('/kegiatan', [KegiatanController::class, 'store'])->name('store.kegiatan');
+Route::get('/kegiatan/{level?}', [KegiatanController::class, 'search'])->name('cari.kegiatan');
+Route::get('/kegiatan/{id}/edit', [KegiatanController::class, 'edit'])->name('edit.kegiatan');
+Route::put('/kegiatan/{id}', [KegiatanController::class, 'update'])->name('update.kegiatan');
+Route::delete('/kegiatan/{id}', [KegiatanController::class, 'destroy'])->name('destroy.kegiatan');
+
 //PROFIL
 Route::get('/profil', [ProfilController::class, 'index'])->name('profil');
 Route::put('/profil/{id}', [ProfilController::class, 'update'])->name('profil.update');
@@ -150,4 +161,6 @@ Route::get('/mobile/jadwal', [JadwalMobileController::class, 'index'])->name('mo
 Route::get('/mobile/presensi', [PresensiMobileController::class, 'index'])->name('mobile.presensi');
 Route::get('/mobile/informasi', [InformasiMobileController::class, 'index'])->name('mobile.informasi');
 Route::get('/mobile/ekskul', [EkstrakulikulerMobileController::class, 'index'])->name('mobile.ekskul');
+Route::get('/mobile/ekskul/{id}/detail', [EkstrakulikulerMobileController::class, 'detail'])->name('mobile.ekskul.detail');
 Route::get('/mobile/dataeskul', [PendaftarMobileController::class, 'index'])->name('mobile.dataeskul');
+Route::get('/mobile/kegiatan', [KegiatanMobileController::class, 'index'])->name('mobile.kegiatan');

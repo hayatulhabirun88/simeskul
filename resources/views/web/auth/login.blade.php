@@ -16,7 +16,32 @@
     <link rel="stylesheet" href="{{ asset('/') }}otika/assets/css/components.css">
     <!-- Custom style CSS -->
     <link rel="stylesheet" href="{{ asset('/') }}otika/assets/css/custom.css">
-    <link rel='shortcut icon' type='image/x-icon' href='{{ asset(' /') }}otika/assets/img/favicon.ico' />
+    <link rel='shortcut icon' type='image/x-icon' href='{{ asset(' /') }}logo.png' />
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background-image: url('{{ asset('/') }}login-background.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.008);
+            /* Putih dengan opasitas 0,008 */
+            pointer-events: none;
+        }
+    </style>
 </head>
 
 <body>
@@ -29,11 +54,12 @@
                     <div
                         class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
                         <div class="text-center">
-                            <h5 class="text-center">Sistem Informasi Ekstrakurikuler</h5>
-                            <h5 class="text-center">SMAN 1 Baubau</h5>
+                            <h5 class="text-center" style="color:#041ac2;">Sistem Informasi
+                                Ekstrakurikuler</h5>
+                            <h5 class="text-center" style="color:#041ac2;">SMAN 1 Baubau</h5>
 
                         </div><br>
-                        <div class="card card-primary">
+                        <div class="card card-primary" style="background-color: rgba(255, 255, 255, 0.85);">
                             <div class="card-header">
 
                             </div>
@@ -56,11 +82,6 @@
                                     <div class="form-group">
                                         <div class="d-block">
                                             <label for="password" class="control-label">Password</label>
-                                            {{-- <div class="float-right">
-                                                <a href="/lupa-password" class="text-small">
-                                                    Lupa Password?
-                                                </a>
-                                            </div> --}}
                                         </div>
                                         <input id="password" type="password" class="form-control" name="password"
                                             tabindex="2" required>
@@ -77,9 +98,6 @@
 
                             </div>
                         </div>
-                        {{-- <div class="mt-5 text-muted text-center">
-                            Belum punya akun? <a href="/daftar">Daftar</a>
-                        </div> --}}
                     </div>
                 </div>
             </div>

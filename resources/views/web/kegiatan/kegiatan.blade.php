@@ -1,7 +1,7 @@
 @extends('web.template.content')
 
 @section('title')
-    Kategori Ekstrakulikuler
+    Daftar Kegiatan
 @endsection
 
 @section('content')
@@ -9,13 +9,13 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4>Daftar Ekstrakulikuler</h4>
+                    <h4>Daftar Kegiatan</h4>
                 </div>
                 <div class="card-body">
                     <div class="row mb-3">
                         <div class="col-8">
                             <div class="mb-3">
-                                <form action="{{ route('eskul.kategori.search') }}" method="get" id="searchForm">
+                                <form action="{{ route('cari.kegiatan') }}" method="get" id="searchForm">
                                     <input type="text" class="form-control" name="cari" id="searchInput"
                                         placeholder="Cari" />
                                 </form>
@@ -24,7 +24,7 @@
                         </div>
                         <div class="col-4">
                             <a type="submit" name="" id="" class="btn btn-primary float-right "
-                                href="/eskul/kategori/create" role="button">Tambah</a>
+                                href="/kegiatan/create" role="button">Tambah</a>
 
                         </div>
 
@@ -34,32 +34,36 @@
                         <table class="table table-bordered table-md">
                             <thead>
                                 <tr>
-                                    <th width="50">#</th>
-                                    <th>Name</th>
-                                    <th>Icon</th>
+                                    <th width="50">No</th>
+                                    <th>Nama</th>
+                                    <th>Foto</th>
                                     <th>Deskripsi</th>
+                                    <th>Ekstrakulikuler</th>
+                                    <th>Pembina</th>
                                     <th width="150">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($eskulkategori as $index => $eskul)
+                                @foreach ($kegiatan as $index => $kgt)
                                     <tr>
-                                        <td>{{ $index + $eskulkategori->firstItem() }}</td>
-                                        <td>{{ $eskul->nama_ekstrakulikuler }}</td>
-                                        <td><img width="30" src="{{ asset('/') }}icon/{{ $eskul->icon }}"
+                                        <td>{{ $index + $kegiatan->firstItem() }}</td>
+                                        <td>{{ $kgt->nama_kegiatan }}</td>
+                                        <td><img width="50"
+                                                src="{{ asset('/') }}{{ env('ASSET_UPLOAD') }}/foto_kegiatan/{{ $kgt->foto_kegiatan }}"
                                                 alt=""></td>
-                                        <td>{{ substr($eskul->deskripsi, 0, 30) . ' ...' }} </td>
+                                        <td>{{ $kgt->deskripsi }}</td>
+                                        <td>{{ $kgt->ekstrakulikuler->nama_ekstrakulikuler }}</td>
+                                        <td>{{ $kgt->pembina->nama_pembina }}</td>
                                         <td>
-                                            <a href="/eskul/kategori/{{ $eskul->id }}/edit"
-                                                class="btn btn-sm btn-warning"><i class="far fa-edit"></i></a>
-                                            <form action="{{ route('eskul.kategoridestroy', $eskul->id) }}"
-                                                style="display:inline" method="POST"
-                                                id="deleteEskulForm-{{ $eskul->id }}">
+                                            <a href="/kegiatan/{{ $kgt->id }}/edit" class="btn btn-sm btn-warning"><i
+                                                    class="far fa-edit"></i></a>
+                                            <form action="{{ route('destroy.kegiatan', $kgt->id) }}" style="display:inline"
+                                                method="POST" id="deletekegiatanForm-{{ $kgt->id }}">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-sm btn-danger hapus-eskul-btn"
-                                                    data-nama-eskul="{{ $eskul->nama_ekstrakulikuler }}"
-                                                    data-form-id="deleteEskulForm-{{ $eskul->id }}">
+                                                <button type="submit" class="btn btn-sm btn-danger hapus-kegiatan-btn"
+                                                    data-nama-kgt="{{ $kgt->nama_kegiatan }}"
+                                                    data-form-id="deletekegiatanForm-{{ $kgt->id }}">
                                                     <i class="fas fa-trash"></i>
                                                 </button>
                                             </form>
@@ -71,20 +75,20 @@
                     </div>
                     <div class="pagination justify-content-end ">
                         <ul class="pagination">
-                            <li class="page-item {{ $eskulkategori->onFirstPage() ? 'disabled' : '' }}">
-                                <a class="page-link" href="{{ $eskulkategori->previousPageUrl() }}" aria-label="Previous">
+                            <li class="page-item {{ $kegiatan->onFirstPage() ? 'disabled' : '' }}">
+                                <a class="page-link" href="{{ $kegiatan->previousPageUrl() }}" aria-label="Previous">
                                     <span aria-hidden="true">&laquo;</span>
                                 </a>
                             </li>
 
-                            @foreach ($eskulkategori->getUrlRange(1, $eskulkategori->lastPage()) as $page => $url)
-                                <li class="page-item {{ $page == $eskulkategori->currentPage() ? 'active' : '' }}">
+                            @foreach ($kegiatan->getUrlRange(1, $kegiatan->lastPage()) as $page => $url)
+                                <li class="page-item {{ $page == $kegiatan->currentPage() ? 'active' : '' }}">
                                     <a class="page-link" href="{{ $url }}">{{ $page }}</a>
                                 </li>
                             @endforeach
 
-                            <li class="page-item {{ $eskulkategori->hasMorePages() ? '' : 'disabled' }}">
-                                <a class="page-link" href="{{ $eskulkategori->nextPageUrl() }}" aria-label="Next">
+                            <li class="page-item {{ $kegiatan->hasMorePages() ? '' : 'disabled' }}">
+                                <a class="page-link" href="{{ $kegiatan->nextPageUrl() }}" aria-label="Next">
                                     <span aria-hidden="true">&raquo;</span>
                                 </a>
                             </li>
@@ -117,14 +121,14 @@
             });
 
 
-            $(".hapus-eskul-btn").click(function(e) {
+            $(".hapus-kegiatan-btn").click(function(e) {
                 e.preventDefault();
                 var formId = $(this).data('form-id');
-                var eskulName = $(this).data('nama-eskul');
+                var kegiatanName = $(this).data('nama-kgt');
 
                 swal({
                     title: 'Apakah anda yakin?',
-                    text: 'Akan menghapus eskul ' + eskulName + ' !',
+                    text: 'Akan menghapus kegiatan ' + kegiatanName + ' !',
                     icon: 'warning',
                     buttons: true,
                     dangerMode: true,
