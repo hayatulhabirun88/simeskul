@@ -158,6 +158,7 @@ Route::get('/mobile/setting', [HomeMobileController::class, 'setting'])->name('m
 Route::post('/mobile/setting_proses_siswa', [HomeMobileController::class, 'proses_siswa'])->name('mobile.setting.proses.siswa');
 Route::post('/mobile/setting_proses_orangtua', [HomeMobileController::class, 'proses_orangtua'])->name('mobile.setting.proses.orangtua');
 Route::get('/mobile/jadwal', [JadwalMobileController::class, 'index'])->name('mobile.jadwal');
+Route::get('/mobile/jadwal-detail/{id}', [JadwalMobileController::class, 'show'])->name('mobile.jadwal.show');
 Route::get('/mobile/presensi', [PresensiMobileController::class, 'index'])->name('mobile.presensi');
 Route::get('/mobile/informasi', [InformasiMobileController::class, 'index'])->name('mobile.informasi');
 Route::get('/mobile/ekskul', [EkstrakulikulerMobileController::class, 'index'])->name('mobile.ekskul');

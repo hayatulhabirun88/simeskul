@@ -25,4 +25,10 @@ class JadwalMobileController extends Controller
         return view('mobile.jadwal.jadwal', compact(['jadwal']));
     }
 
+    public function show($id)
+    {
+        $jadwal = Jadwal::find($id);
+        return view('mobile.jadwal.detail', compact('jadwal'));
+    }
+
 }

@@ -211,20 +211,18 @@
                         @foreach ($presensi as $presens)
                             <div id="single-product-item" class="single-product-item product-item--style-4">
                                 <div>
-                                    <a href="single-product.html" class="title">
-                                        {{ $presens->tgl_presensi }} <strong>Ekskul
-                                            {{ @$presens->nama_ekstrakulikuler }}</strong> |
-                                        Pembina: {{ @$presens->nama_pembina }} |
-                                        @if ($presens->status_kehadiran == 'Hadir')
-                                            <span
-                                                style="background-color:#28a745; padding:4px; border-radius:4px;color:white;">Hadir</span>
-                                        @else
-                                            <span
-                                                style="background-color:#dc3545; padding:4px; border-radius:4px;color:white;">Tidak
-                                                Hadir</span>
-                                        @endif
+                                    {{ $presens->tgl_presensi }} <strong>Ekskul
+                                        {{ @$presens->nama_ekstrakulikuler }}</strong> |
+                                    Pembina: {{ @$presens->nama_pembina }} |
+                                    @if ($presens->status_kehadiran == 'Hadir')
+                                        <span
+                                            style="background-color:#28a745; padding:4px; border-radius:4px;color:white;">Hadir</span>
+                                    @else
+                                        <span
+                                            style="background-color:#dc3545; padding:4px; border-radius:4px;color:white;">Tidak
+                                            Hadir</span>
+                                    @endif
 
-                                    </a>
                                 </div>
                             </div>
                         @endforeach
@@ -244,21 +242,25 @@
                 <div class="product-wrapper-content--4">
                     @foreach ($jadwal as $jdw)
                         <li class="single-cart-item" style="margin-top:10px">
+
                             <div class="image">
                                 <img width="90" height="90"
                                     src="{{ asset('/') }}icon/{{ $jdw->ekstrakulikuler->icon }}" alt="image">
                             </div>
                             <div class="content">
-                                Bertempat di <strong>{{ $jdw->tempat }}</strong> mulai
-                                {{ $jdw->jam_mulai }} WITA selesai {{ $jdw->jam_selesai }} WITA
-                                <div class="details">
-                                    <div class="left">
-                                        <span class="redbook">
-                                            <strong>Ekstrakulikuler
-                                                {{ $jdw->ekstrakulikuler->nama_ekstrakulikuler }}</strong></span>
+                                <a href="/mobile/jadwal-detail/{{ $jdw->id }}">
+                                    Bertempat di <strong>{{ $jdw->tempat }}</strong> mulai
+                                    {{ $jdw->jam_mulai }} WITA selesai {{ $jdw->jam_selesai }} WITA
+                                    <div class="details">
+                                        <div class="left">
+                                            <span class="redbook">
+                                                <strong>Ekstrakulikuler
+                                                    {{ $jdw->ekstrakulikuler->nama_ekstrakulikuler }}</strong></span>
+                                        </div>
                                     </div>
-                                </div>
+                                </a>
                             </div>
+
                         </li>
                     @endforeach
                 </div>

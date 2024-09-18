@@ -36,17 +36,12 @@
             @foreach ($kegiatan as $kgt)
                 <div class="single-product-item product-item--style-3" style="margin-top:10px;">
                     <div class="image">
-                        <a href="single-product.html">
-                            <img width="100%" class="img-fluid"
-                                src="{{ asset('/') }}foto_kegiatan/{{ $kgt->foto_kegiatan }}" alt="image">
-                        </a>
-                        <a href="wishlist.html" aria-label="Wishlist"
-                            class="btn btn--size-33-33 btn--center btn--round btn--color-radical-red btn--bg-white btn--box-shadow"><i
-                                class="icon icon-carce-heart"></i></a>
+                        <img width="100%" class="img-fluid"
+                            src="{{ asset('/') }}foto_kegiatan/{{ $kgt->foto_kegiatan }}" alt="image">
                     </div>
                     <div class="content">
                         <div class="content--left">
-                            <a href="single-product.html" class="title">{{ $kgt->deskripsi }}</a>
+                            {{ $kgt->deskripsi }}
                             <span class="price">{{ $kgt->nama_kegiatan }}</span>
                         </div>
                         <div class="content--right">

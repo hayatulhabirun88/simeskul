@@ -43,20 +43,17 @@
                         @foreach ($presensi as $presens)
                             <div id="single-product-item" class="single-product-item product-item--style-4">
                                 <div>
-                                    <a href="single-product.html" class="title">
-                                        {{ $presens->tgl_presensi }} <strong>Ekskul
-                                            {{ @$presens->nama_ekstrakulikuler }}</strong> |
-                                        Pembina: {{ @$presens->nama_pembina }} |
-                                        @if ($presens->status_kehadiran == 'Hadir')
-                                            <span
-                                                style="background-color:#28a745; padding:4px; border-radius:4px;color:white;">Hadir</span>
-                                        @else
-                                            <span
-                                                style="background-color:#dc3545; padding:4px; border-radius:4px;color:white;">Tidak
-                                                Hadir</span>
-                                        @endif
-
-                                    </a>
+                                    {{ $presens->tgl_presensi }} <strong>Ekskul
+                                        {{ @$presens->nama_ekstrakulikuler }}</strong> |
+                                    Pembina: {{ @$presens->nama_pembina }} |
+                                    @if ($presens->status_kehadiran == 'Hadir')
+                                        <span
+                                            style="background-color:#28a745; padding:4px; border-radius:4px;color:white;">Hadir</span>
+                                    @else
+                                        <span
+                                            style="background-color:#dc3545; padding:4px; border-radius:4px;color:white;">Tidak
+                                            Hadir</span>
+                                    @endif
                                 </div>
                             </div>
                         @endforeach

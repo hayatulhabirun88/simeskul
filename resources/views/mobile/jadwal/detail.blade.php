@@ -21,7 +21,7 @@
     <!-- ...:::Start Catagories - 1 Section:::... -->
     <div class="catagories-section section-gap-top-50">
         <div class="container">
-            <div class="catagories-area">
+            {{-- <div class="catagories-area">
                 <div class="catagories-nav-1">
                     <!-- Slider main container -->
                     <div class="swiper">
@@ -32,34 +32,34 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
-            <div class="title-content">
+            {{-- <div class="title-content">
                 <h2 class="title">Jadwal</h2>
-            </div>
+            </div> --}}
             <div class="product-wrapper">
                 <div class="product-wrapper-content--4">
-                    @foreach ($jadwal as $jdw)
-                        <li class="single-cart-item" style="margin-top:10px">
-                            <div class="image">
-                                <img width="90" height="90"
-                                    src="{{ asset('/') }}icon/{{ $jdw->ekstrakulikuler->icon }}" alt="image">
+                    <li class="single-cart-item" style="margin-top:10px">
+                        <div class="image">
+                            <img width="90" height="90"
+                                src="{{ asset('/') }}icon/{{ $jadwal->ekstrakulikuler->icon }}" alt="image">
+                        </div>
+                        <div class="content">
+                            <div class="details">
+                                <div class="left">
+                                    <span class="redbook">
+                                        <strong>Ekstrakulikuler
+                                            {{ $jadwal->ekstrakulikuler->nama_ekstrakulikuler }}</strong></span>
+                                </div>
                             </div>
-                            <div class="content">
-                                <a href="/mobile/jadwal-detail/{{ $jdw->id }}">
-                                    Bertempat di <strong>{{ $jdw->tempat }}</strong> tanggal {{ $jdw->tgl_kegiatan }} mulai
-                                    {{ $jdw->jam_mulai }} WITA selesai {{ $jdw->jam_selesai }} WITA
-                                    <div class="details">
-                                        <div class="left">
-                                            <span class="redbook">
-                                                <strong>Ekstrakulikuler
-                                                    {{ $jdw->ekstrakulikuler->nama_ekstrakulikuler }}</strong></span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </li>
-                    @endforeach
+                            {{ \Carbon\Carbon::parse($jadwal->tgl_kegiatan)->locale('id')->translatedFormat('d F Y') }}<br>
+
+                            Bertempat di <strong>{{ $jadwal->tempat }}</strong> <br>
+                            di mulai{{ $jadwal->jam_mulai }} WITA <br>
+                            selesai {{ $jadwal->jam_selesai }} WITA
+
+                        </div>
+                    </li>
                 </div>
             </div>
 
